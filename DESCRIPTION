@@ -1,5 +1,5 @@
 Package: xegaBNF
-Title: Compile a BNF (Backus-Naur Form) Specification into an R Grammar Object
+Title: Compile a Backus-Naur Form Specification into an R Grammar Object
 Version: 1.0.0.0
 Authors@R: 
     person(given = "Andreas",
@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "Andreas.Geyer-Schulz@kit.edu",
            comment = c(ORCID = "0009-0000-5237-3579"))
-Description: Translates a 'BNF' ('Backus'-'Naur' Form) specification of a 
+Description: Translates a 'BNF' (Backus-Naur Form) specification of a 
              context-free language into an R grammar object
              which consists of the start symbol, the symbol table, 
              the production table, and a short production table.
@@ -17,8 +17,12 @@ Description: Translates a 'BNF' ('Backus'-'Naur' Form) specification of a
              In addition, it provides functions to determine the type 
              of a symbol ('isTerminal' and 'isNonterminal') and functions
              to access the production table ('rules' and 'derives').
+             For the 'BNF' specification, see Backus, John et al. (1962)
+             "Revised Report on the Algorithmic Language ALGOL 60".
+             The grammar compiler is based on the APL2 implementation in 
+             Geyer-Schulz, Andreas (1997, ISBN:	978-3-7908-0830-X).
 License: MIT + file LICENSE
-URL: https://github.com/ageyerschulz/xegaBNF.git
+URL: <https://github.com/ageyerschulz/xegaBNF>
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.2.3

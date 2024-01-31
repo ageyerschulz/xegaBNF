@@ -154,7 +154,7 @@
 #' @author Andreas Geyer-Schulz
 #' @section Copyright: (c) 2023 Andreas Geyer-Schulz
 #' @section License: MIT
-#' @section URL: TBD
-#' @section Installation: TBD
+#' @section URL: <https://github.com/ageyerschulz/xegaBNF>
+#' @section Installation: From CRAN by \code{install.packages('xegaBNF')}
 NULL
 

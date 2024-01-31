@@ -37,7 +37,7 @@ return(list(filename=filename, BNF=readChar(filename, file.info(filename)$size))
 #' @param g     A named list with $filename and  $BNF as a character string.
 #' @param fn    A file name. Default: NULL.
 #'
-#' @return  Invisible NULL
+#' @return  Invisible NULL.
 #'
 #' @family File I/O
 #'
@@ -566,6 +566,10 @@ while(length(Nonterminals)>0)
 #'         \item \code{SPT} (the short production table).
 #'         }
 #'
+#' @references   Geyer-Schulz, Andreas (1997):
+#'      \emph{Fuzzy Rule-Based Expert Systems and Genetic Machine Learning},
+#'      Physica, Heidelberg. (ISBN:978-3-7908-0830-X)
+#'
 #' @family Grammar Compiler
 #'
 #' @examples
@@ -591,15 +595,4 @@ compileBNF<-function(g, verbose=FALSE)
   return(CFG)
 }
 
-cat("Loaded GrammarCompiler.R\n")
-cat("Usage: <variable> <-compileBNF(<filename>)\n")
-cat("g <-compileBNF(\"BooleanGrammar.txt\") \n")
-
-cat("g$name: The (file) name of the grammar\n")
-cat("g$ST: The symbol Table\n")
-cat("g$PT$RHS: The Right Hand Side of the Production Table\n")
-cat("g$PT$LHS: The Right Hand Side of the Production Table\n")
-cat("g$Start: The Start symbol of the grammar\n")
-cat("g$SPT: The Short Production Table:\n")
-cat("       The smallest finite substition paths for all Non Terminals .\n")
-
+# end of file
