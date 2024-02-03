@@ -5,111 +5,11 @@
 # Package BNF
 #
 
-### TODO: Skip text I/O on cran!
-
-#' Read text file.
-#'
-#' @description \code{readBNF} reads a text file and returns a character string.
-#'
-#' @param filename    A file name.
-#'
-#' @return A named list with
-#'     \itemize{
-#'         \item $filename  the filename.
-#'         \item $BNF a character string with the newline symbol \\n.
-#'         }
-#'
-#' @family File I/O
-#'
-#' @examples
-#' \dontrun{a<-readBNF("~/dev/cran/xega/xegaBNF/BooleanGrammar.txt")}
-#'
-#' @export
-readBNF<-function(filename)
-{
-return(list(filename=filename, BNF=readChar(filename, file.info(filename)$size)))
-}
-
-#' Write BNF into text file.
-#'
-#' @description \code{writeBNF} writes a character string into a textfile
-#'
-#' @param g     A named list with $filename and  $BNF as a character string.
-#' @param fn    A file name. Default: NULL.
-#'
-#' @return  Invisible NULL.
-#'
-#' @family File I/O
-#'
-#' @examples
-#' \dontrun{a<-readBNF("~/dev/cran/xega/xegaBNF/BooleanGrammar.txt")}
-#' \dontrun{writeBNF(a)}
-#'
-#' @export
-writeBNF<-function(g, fn=NULL)
-{ fname<-fn
-if (identical(fn, NULL)) {fname<-g$filename}
-return(writeChar(g$BNF, fname, eos=NULL))
-}
-
-#' Convert grammar file into a constant function.
-#' 
-#' @description \code{newBNF} reads a text file and 
-#'              returns a constant function which returns
-#'              the BNF as a character string.  
-#'
-#' @details The purpose of this function is to include examples
-#'          of grammars in packages.
-#'
-#' @param filename A file name.
-#' 
-#' @return Returns a constant function which returns a BNF.
-#' 
-#' @family File I/O
-#'
-#' @examples
-#' \dontrun{newBNF("~/dev/cran/xega/xegaBNF/BooleanGrammar.txt")}
-#' 
-#' @export
-newBNF<-function(filename)
-{
-parm<-function(x){function() {return(x)}}
-b<-readBNF(filename)
-b$BNF<-chartr("\n", " ",b$BNF)
-f<-parm(b)
-x<-f()
-return(f)
-}
-
-#' A constant function which returns the BNF (Backus-Naur Form) 
-#' of a context-free grammar for the XOR problem.
-#'
-#' @return A named list with $filename and  $BNF, 
-#'         the grammar of a boolean grammar with two variables and
-#'         the boolean functions AND, OR, and NOT.
-#'
-#' @examples
-#' \dontrun{booleanGrammar<-newBNF("~/dev/cran/xega/xegaBNF/BooleanGrammar.txt")}
-#' booleanGrammar()
-#' @export
-booleanGrammar<-function()
-{
-   fn<-"~/dev/cran/xega/xegaBNF/BooleanGrammar.txt"
-   bnf<-"S := <fe>; <fe> := <f0> |   "
-   bnf<-paste(bnf, "  <f1> \"(\" <fe> \")\" | ")
-   bnf<-paste(bnf, " <f2> \"(\" <fe> \",\" <fe> \")\"; ")
-   bnf<-paste(bnf, " <f0> := \"D1\" | \"D2\"; ")
-   bnf<-paste(bnf, " <f1> := \"NOT\"; ")
-   bnf<-paste(bnf, "  <f2> := \"OR\" | \"AND\";  ")
-   return(list(filename=fn, BNF=bnf))
-}
-#booleanGrammar<-newBNF("~/dev/cran/xega/xegaBNF/BooleanGrammar.txt")
-
 # (2) Make Symbol Table ST 
 
 #' Build a symbol table from a character string which contains a BNF.
 #' 
-#' @description \code{makeSymbolTable} extracts all terminal 
+#' @description \code{makeSymbolTable()} extracts all terminal 
 #'              and non-terminal symbols from a BNF
 #'              and builds a data frame with the columns 
 #'              Symbols (string), NonTerminal (0 or 1), and SymbolId (int).
@@ -146,7 +46,7 @@ return(data.frame(Symbols, NonTerminal, SymbolId))}
 
 #' Convert a symbol to a numeric identifier.
 #' 
-#' @description \code{symb2id} converts a symbol to a numeric id. 
+#' @description \code{symb2id()} converts a symbol to a numeric id. 
 #' 
 #' @param sym  A character string with the symbol, e.g. <fe> or "NOT". 
 #' @param ST   A symbol table. 
@@ -172,7 +72,7 @@ symb2id<-function(sym, ST)
 
 #' Convert a numeric identifier to a symbol.
 #' 
-#' @description \code{id2symb} converts a numeric id to a symbol.
+#' @description \code{id2symb()} converts a numeric id to a symbol.
 #' 
 #' @param Id       A numeric identifier (integer).  
 #' @param ST       A symbol table. 
@@ -200,11 +100,11 @@ id2symb<-function(Id, ST)
 
 #' Is the numeric identifier a terminal symbol?
 #' 
-#' @description \code{isTerminal} tests if the numeric identifier 
+#' @description \code{isTerminal()} tests if the numeric identifier 
 #'        is a terminal symbol.
 #'
-#' @details \code{isTerminal} is one of the most frequently used 
-#'          functions of a simple genetic programming algorithm.
+#' @details \code{isTerminal()} is one of the most frequently used 
+#'          functions of a grammar-based genetic programming algorithm.
 #'          Careful coding pays off! 
 #'          Do not index the symbol table as a matrix 
 #'          (e.g. \code{ST[2,2]}), because this is really slow! 
@@ -236,11 +136,11 @@ isTerminal<-function(Id, ST)
 
 #' Is the numeric identifier a non-terminal symbol?
 #' 
-#' @description \code{isNonTerminal} tests if the numeric identifier 
+#' @description \code{isNonTerminal()} tests if the numeric identifier 
 #'               is a non-terminal symbol.
 #' 
-#' @details \code{isNonTerminal} is one of the most frequently used 
-#'          functions of a simple genetic programming algorithm.
+#' @details \code{isNonTerminal()} is one of the most frequently used 
+#'          functions of a grammar-based genetic programming algorithm.
 #'          Careful coding pays off! 
 #'          Do not index the symbol table as a matrix 
 #'          (e.g. \code{ST[2,2]}), because this is really slow! 
@@ -274,7 +174,7 @@ isNonTerminal<-function(Id, ST)
 
 #' Transforms a single BNF rule into a production table. 
 #' 
-#' @description \code{makeRule} transforms a single BNF rule
+#' @description \code{makeRule()} transforms a single BNF rule
 #'              into a production table. 
 #' 
 #' @details Because a single BNF rule can provide a set of substitutions, 
@@ -328,7 +228,7 @@ makeRule<-function(Rule, ST)
 
 #' Produces a production table. 
 #' 
-#' @description \code{makeProductionTable} produces a production table 
+#' @description \code{makeProductionTable()} produces a production table 
 #'               from a specification of a BNF.   
 #'               Warning: No error checking implemented.
 #' 
@@ -388,7 +288,7 @@ makeProductionTable<-function(BNF, ST)
 
 #' Returns all indices of rules applicable for a non-terminal identifier.
 #' 
-#' @description \code{rules} finds 
+#' @description \code{rules()} finds 
 #'              all applicable production rules
 #'              for a non-terminal identifier.
 #' 
@@ -418,7 +318,7 @@ rules<-function(Id, LHS){return(as.vector((1:length(LHS))[Id==LHS]))}
 
 #' Derives the identifier list which expands the non-terminal identifier. 
 #' 
-#' @description \code{derives} returns the identifier list which expands 
+#' @description \code{derives()} returns the identifier list which expands 
 #'              a non-terminal identifier.
 #'               Warning: No error checking implemented.
 #' 
@@ -445,7 +345,8 @@ derive<-function(RuleIndex, RHS){return(RHS[[RuleIndex]])}
 
 #' Extracts the numerical identifier of the start symbol of the grammar. 
 #' 
-#' @description \code{makeStartSymbol} returns the start symbol's numerical identifier 
+#' @description \code{makeStartSymbol()} returns 
+#'              the start symbol's numerical identifier 
 #'               from a specification of a context-free grammar in BNF.   
 #'               Warning: No error checking implemented.
 #' 
@@ -472,7 +373,7 @@ makeStartSymbol<-function(BNF, ST)
 
 #' Produces a production table with non-recursive productions only.
 #' 
-#' @description \code{compileShortPT} produces a ``short'' production table 
+#' @description \code{compileShortPT()} produces a ``short'' production table 
 #'               from a context-free grammar. The short production table does not
 #'               contain recursive production rules.  
 #'               Warning: No error checking implemented.
@@ -481,7 +382,7 @@ makeStartSymbol<-function(BNF, ST)
 #'               production table \code{PT}, 
 #'               and start symbol \code{Start}.
 #' 
-#' @details \code{compileShortPT} starts with production rules whose 
+#' @details \code{compileShortPT()} starts with production rules whose 
 #'          right-hand side contains only terminals. 
 #'          It incrementally builds up the new PT until at least one
 #'          production rule sequence from a non-terminal to a terminal symbol.
