@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "Andreas.Geyer-Schulz@kit.edu",
            comment = c(ORCID = "0009-0000-5237-3579"))
-Description: Translates a 'BNF' (Backus-Naur Form) specification of a 
+Description: Translates a BNF (Backus-Naur Form) specification of a 
              context-free language into an R grammar object
              which consists of the start symbol, the symbol table, 
              the production table, and a short production table.
@@ -15,9 +15,9 @@ Description: Translates a 'BNF' (Backus-Naur Form) specification of a
              The grammar object contains the file name from 
              which it was generated (without a path).
              In addition, it provides functions to determine the type 
-             of a symbol ('isTerminal()' and 'isNonterminal()') and functions
-             to access the production table ('rules()' and 'derives()').
-             For the 'BNF' specification, see Backus, John et al. (1962)
+             of a symbol (isTerminal() and isNonterminal()) and functions
+             to access the production table (rules() and derives()).
+             For the BNF specification, see Backus, John et al. (1962)
              "Revised Report on the Algorithmic Language ALGOL 60".
              (ALGOL60 standards page <http://www.algol60.org/2standards.htm>,
               html-edition <https://www.masswerk.at/algol60/report.htm>)
