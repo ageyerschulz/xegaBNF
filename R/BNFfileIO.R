@@ -122,7 +122,7 @@ newBNF<-function(filename, eol="\n")
 {
 parm<-function(x){function() {return(x)}}
 b<-readBNF(filename)
-b$BNF<-gsub(eol, "", b$BNF)
+b$BNF<-gsub(eol, " ", b$BNF)
 f<-parm(b)
 x<-f()
 return(f)
