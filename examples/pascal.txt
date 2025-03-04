@@ -1,0 +1,22 @@
+S := <Expression>;
+
+<Expression> := <Term> |
+                <Sign> <Term> |
+                <Term> <AddingOperator> <Term> |
+                <Sign> <Term> <AddingOperator> <Term>;
+
+<Term> := <Factor> | 
+          <Factor> <MultiplyingOperator> <Factor>;
+
+<Factor> := <Constant> |
+            <Variable> |
+            "(" <Expression> ")";
+
+<Sign> := "+" | "-";
+<AddingOperator> := "+" | "-";
+<MultiplyingOperator> := "*" | "/";
+
+<Constant> := "3.14" | "2.718282";
+
+<Variable> := "V1" | "V2" | "V3";
+

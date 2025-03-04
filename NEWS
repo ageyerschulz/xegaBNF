@@ -1,6 +1,6 @@
 
 -------------------------------------------------------------------------
-  xega                                                              News
+  xegaBNF                                                              News
 -------------------------------------------------------------------------
 
 Version 1.0.0.1 (2024-07-10)
@@ -8,4 +8,14 @@ Version 1.0.0.1 (2024-07-10)
 - Documentation improved.
 - newBNF(): eol are changed into spaces. 
             Reason: Grammar symbols are separated by blanks. 
+
+Version 1.0.0.2 (2025-03-04)
+
+- compileShortPT(): provides for each non-terminal symbol 
+          at least one production rule which generates a list 
+          of one or more terminal symbols.
+
+- BNFhelpers.R: The functions needed for compileShortPT().
+
+- printPT(): Print a production table in symbolic form.
 
