@@ -32,4 +32,7 @@ Version 1.0.0.4 (2025-03-13)
 - preBNF(): Preprocessor for macros (R-code) in grammar files.
             Uses pastePart(), evenMacro(), exsistMacro()
  
+Version 1.0.0.5 (2025-04-02)
+
+- dataframePT(): Return a production table as a (readable) dataframe.  
 

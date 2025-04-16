@@ -1,6 +1,6 @@
 Package: xegaBNF
 Title: Compile a Backus-Naur Form Specification into an R Grammar Object
-Version: 1.0.0.4
+Version: 1.0.0.5
 Authors@R: 
     person(given = "Andreas",
            family = "Geyer-Schulz",
